@@ -6,6 +6,5 @@ COPY package.json .
 RUN npm install
 
 COPY app.js .
-COPY log-data/ ./log-data/
 
 CMD ["node", "app.js"]
