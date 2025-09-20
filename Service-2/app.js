@@ -18,18 +18,14 @@ function getStatus() {
 
 app.get('/status', async (req, res) => {
     try {
-        // 5. Service2 analyses its status
         const status2 = getStatus();
         console.log('Service2 status:', status2);
-        // 6. Service2 sends the created record to Storage
         await axios.post(STORAGE_URL, status2, {
             headers: { 'Content-Type': 'text/plain' }
         });
         
-        // 7. Service2 writes the record to vStorage
         fs.appendFileSync('/vstorage/service.log', status2 + '\n');
         
-        // 8. Service2 sends the record as response
         res.set('Content-Type', 'text/plain');
         res.send(status2);
     } catch (error) {
