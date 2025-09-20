@@ -1,0 +1,8 @@
+I used Chat GPT for getting help regarding the Service1 Python app, As I Didn't know about the 
+flask which is so helpfull for small size api applications. Also took help regarding the internal 
+network setup, though I have gone through the docker network documentation, But I faced some issue, 
+where I took help from LLM to understand the mistake I was doing. 
+
+So far regarding the service3 log setup LLM was suggesting me to use docker default volume, where 
+I used my custom defined volume to store logs.
+
