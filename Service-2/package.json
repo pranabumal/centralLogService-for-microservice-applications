@@ -1,0 +1,10 @@
+{
+  "name": "service2",
+  "version": "1.0.0",
+  "description": "Service2 for Docker compose exercise",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.5.0"
+  }
+}

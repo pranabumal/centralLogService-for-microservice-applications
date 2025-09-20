@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  service1:
+    build: ./Service-1
+    ports:
+      - "8199:8177"
+    networks:
+      - app-network
+    volumes:
+      - vstorage:/vstorage
+    depends_on:
+      - service2
+      - service3
+
+  service2:
+    build: ./Service-2
+    networks:
+      - app-network
+    volumes:
+      - vstorage:/vstorage
+    depends_on:
+      - service3
+
+  service3:
+    build: ./Service-3
+    networks:
+      - app-network
+    volumes:
+      - ./Service-3/log-data:/usr/src/app/log-data
+      - vstorage:/vstorage
+
+volumes:
+  vstorage:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./vstorage
+  storage-data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,16 @@
+=> docker network ls
+
+NETWORK ID     NAME                                                          DRIVER    SCOPE
+7e5a1af667f5   bridge                                                        bridge    local
+9052c753be05   host                                                          host      local
+69cfc12b55dc   none                                                          null      local
+c91908537958   centrallogservice-for-microservice-applications_app-network   bridge    local
+
+
+
+=> docker container ls   
+
+CONTAINER ID   IMAGE                                                      COMMAND                  CREATED         STATUS                  PORTS                    NAMES
+c61a00895b50   centrallogservice-for-microservice-applications-service1   "python app.py"          7 minutes ago   Up 7 minutes            0.0.0.0:8199->8177/tcp   centrallogservice-for-microservice-applications-service1-1
+22f45de5d607   centrallogservice-for-microservice-applications-service2   "docker-entrypoint.s…"   7 minutes ago   Up 7 minutes                                     centrallogservice-for-microservice-applications-service2-1
+9edd15100ea1   centrallogservice-for-microservice-applications-service3   "docker-entrypoint.s…"   7 minutes ago   Up 7 minutes                                     centrallogservice-for-microservice-applications-service3-1
