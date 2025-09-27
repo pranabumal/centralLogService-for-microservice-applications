@@ -24,7 +24,7 @@ app.get('/status', async (req, res) => {
             headers: { 'Content-Type': 'text/plain' }
         });
         
-        fs.appendFileSync('/vstorage/service.log', status2 + '\n');
+        fs.appendFileSync('/vstorage', status2 + '\n');
         
         res.set('Content-Type', 'text/plain');
         res.send(status2);

@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 SERVICE2_URL = "http://service2:8282/status"
 STORAGE_URL = "http://service3:8383/log"
+STORAGE_DELETE_URL = "http://service3:8383/delete-logs"
 
 def get_status():
     uptime = time.time() - psutil.boot_time()
@@ -21,7 +22,7 @@ def status():
     
     requests.post(STORAGE_URL, data=status1, headers={'Content-Type': 'text/plain'})
     
-    with open('/vstorage/service.log', 'a') as f:
+    with open('/vstorage', 'a') as f:
         f.write(status1 + '\n')
     
     response = requests.get(SERVICE2_URL)
@@ -31,6 +32,13 @@ def status():
 @app.route('/log')
 def log():
     response = requests.get(STORAGE_URL)
+    return response.text, 200, {'Content-Type': 'text/plain'}
+
+@app.route('/delete-logs')
+def delete_logs():
+    response = requests.delete(STORAGE_DELETE_URL)
+    with open('/vstorage', 'w') as f:
+            pass
     return response.text, 200, {'Content-Type': 'text/plain'}
 
 if __name__ == '__main__':

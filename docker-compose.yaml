@@ -8,7 +8,7 @@ services:
     networks:
       - app-network
     volumes:
-      - vstorage:/vstorage
+      - ./vstorage:/vstorage
     depends_on:
       - service2
       - service3
@@ -18,7 +18,7 @@ services:
     networks:
       - app-network
     volumes:
-      - vstorage:/vstorage
+      - ./vstorage:/vstorage
     depends_on:
       - service3
 
@@ -27,18 +27,11 @@ services:
     networks:
       - app-network
     volumes:
-      - ./Service-3/log-data:/usr/src/app/log-data
-      - vstorage:/vstorage
+      - log-data:/log-data
+      - ./vstorage:/vstorage
 
 volumes:
-  vstorage:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./vstorage
-  storage-data:
-    driver: local
+  log-data:
 
 networks:
   app-network:
