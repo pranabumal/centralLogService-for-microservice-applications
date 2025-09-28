@@ -10,10 +10,12 @@ const STORAGE_URL = "http://service3:8383/log";
 
 function getStatus() {
     const uptime = os.uptime();
-    const diskInfo = fs.statSync('/');
-    const freeDisk = diskInfo.size - diskInfo.blocks * diskInfo.blksize;
     const timestamp = new Date().toISOString();
-    return `${timestamp}: uptime ${(uptime/3600).toFixed(2)} hours, free disk in root: ${(freeDisk/1024/1024).toFixed(2)} MBytes`;
+    const { execSync } = require('child_process');
+    const freeDisk = execSync("df / | awk 'NR==2 {print $4}'").toString().trim();
+    const freeDiskMB = (parseInt(freeDisk) * 1024) / (1024 * 1024); // Convert from KB to MB
+    return `${timestamp}: uptime ${(uptime/3600).toFixed(2)} hours, free disk in root: ${freeDiskMB.toFixed(2)} MBytes`;
+ 
 }
 
 app.get('/status', async (req, res) => {
